@@ -1,7 +1,5 @@
+import { SigninController } from "../controllers/AuthController";
+
 const router = require("express").Router();
 
-router.post("/signin",async (req,res) => {
-    const {email,paswword} = req.body;
-
-    
-})
+router.post("/signin",SigninController);
