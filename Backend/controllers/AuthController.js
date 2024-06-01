@@ -1,10 +1,11 @@
 import { User } from "../models/UserModel.js";
 import { asyncHandler } from "../utils/AsyncHandler.js";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 
 const generateAccessAndRefreshToken = async (userId) => {
   try {
-    const user = await User.findById({ userId });
+    const user = await User.findById({ _id:userId });
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
 
@@ -67,7 +68,7 @@ export const LoginController = asyncHandler(async (req, res) => {
     }
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
-      user._id
+      user._id.toString()
     );
 
     const loggedInUser = {
